@@ -12,8 +12,15 @@ public class Product {
         this.name = name;
         this.price = price;
     }
-    //add getters
     public Long getId() { return id; }
-    public String getName() { return name; }//get name method
+    public String getName() { return name; }//Returns the name
     public double getPrice() { return price; }
+
+    public void setId(Long id) { this.id = id; }
+    public void setName(String name) { this.name = name; }
+    public void setPrice(double price) { this.price = price; }
+
 }
+
+
+
