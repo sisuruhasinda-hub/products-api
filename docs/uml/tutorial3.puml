@@ -1,33 +1,55 @@
 @startuml
+
 class Product {
-- id : Long
-- name : String
-- price : double
-+ getId() : Long
-+ getName() : String
-+ getPrice() : double
-+ setId(id : Long) : void
-+ setName(name : String) : void
-+ setPrice(price : double) : void
+  - id : Long
+  - name : String
+  - price : double
+  + getId() : Long
+  + getName() : String
+  + getPrice() : double
+  + setId(id : Long) : void
+  + setName(name : String) : void
+  + setPrice(price : double) : void
 }
+
+class DigitalProduct {
+  - downloadUrl : String
+  - fileSizeMB : double
+  + getDownloadUrl() : String
+}
+
+class PhysicalProduct {
+  - weightKg : double
+  - dimensions : String
+  + getWeightKg() : double
+}
+
 class ProductService {
-- products : List<Product>
-- nextId : Long
-+ getAllProducts() : List<Product>
-+ getProductById(id : Long) : Optional<Product>
-+ addProduct(product : Product) : Product
-+ deleteProduct(id : Long) : void
-+ findByName(name : String) : List<Product>
+  - products : List<Product>
+  - nextId : Long
+  + getAllProducts() : List<Product>
+  + getProductById(id : Long) : Optional<Product>
+  + addProduct(product : Product) : Product
+  + deleteProduct(id : Long) : void
+  + findByName(name : String) : List<Product>
 }
+
 class ProductController {
-- productService : ProductService
-+ getAllProducts() : List<Product>
-+ getProductById(id : Long) : Product
-+ addProduct(product : Product) : Product
-+ deleteProduct(id : Long) : void
+  - productService : ProductService
+  + getAllProducts() : List<Product>
+  + getProductById(id : Long) : Product
+  + addProduct(product : Product) : Product
+  + deleteProduct(id : Long) : void
 }
-' ..> is a dependency: DASHED line, open arrow
+
+' Dependency: dashed line with open arrow
 ProductController ..> ProductService
-' --> is an association: SOLID line
+
+' Association: solid line
 ProductService --> Product
+
+' Inheritance
+Product <|-- DigitalProduct
+Product <|-- PhysicalProduct
+
 @enduml
